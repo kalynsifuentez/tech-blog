@@ -1,6 +1,4 @@
-// Importing Post model from ../models directory
 const { User } = require("../models");
-// Array of dummy blog post data
 const userData = [
   {
     username: "JohnDoe",

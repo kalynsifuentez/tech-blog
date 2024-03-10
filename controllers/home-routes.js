@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
+const withAuth = require("../utils/auth");
 
 // GET all posts for homepage
 router.get('/', async (req, res) => {
@@ -58,7 +59,6 @@ router.get('/post/:id', withAuth, async (req, res) => {
   }
 });
 
-// GET one painting
 router.get('/dashboard', withAuth, async (req, res) => {
   // If the user is not logged in, redirect the user to the login page
   if (!req.session.loggedIn) {
