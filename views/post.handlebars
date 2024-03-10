@@ -1,0 +1,28 @@
+<!-- ./ Main -->
+<main class="container">
+  <div class="grid">
+    <article>
+        <h3>{{title}}</h3>
+        <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
+        <p>{{content}}</p>
+    </article>
+  {{#if logged_in}}
+  <article>
+    <div>
+          <fieldset>
+            <form id="comment">          
+            <input id="username" type="text" name="text" placeholder="Add Comments" aria-label="Text" />
+          </fieldset>
+          <button type="submit">Submit</button>
+    </div>
+  </article> 
+  {{if}}
+  <h5>Previous Comments</h5>
+  {{each comments}}
+  <div>
+    <p>{{comment_text}}</p>
+    <p> By {{user.username}} on {{format_date createdAt}}</p>
+  </div>
+  {{/each}}
+  </div>
+  </main>

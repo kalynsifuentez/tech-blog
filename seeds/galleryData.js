@@ -1,28 +1,35 @@
-const { Gallery } = require('../models');
+// Importing Post model from ../models directory
+const { User } = require("../models");
+// Array of dummy blog post data
+const userData = [
+  {
+    username: "JohnDoe",
+    email: "JohnDoe@example.com",
+    password: "pa$$word1234",
+  },
+  {
+    username: "JaneDoe",
+    email: "JaneDoe@example.com",
+    password: "Password471",
+  },
+  {
+    username: "KateTill",
+    email: "KateTill@example.com",
+    password: "PassworD4M3",
+  },
+  {
+    username: "DougJones",
+    email: "DougJones@example.com",
+    password: "MyPassword321",
+  },
+  {
+    username: "JackWright",
+    email: "JackWright@example.com",
+    password: "OpenSeseme123",
+  },
 
-const gallerydata = [
-  {
-    name: 'Printemps',
-    starting_date: 'April 20, 2021 07:00:00',
-    ending_date: 'June 21, 2021 17:00:00',
-  },
-  {
-    name: 'Sommer',
-    starting_date: 'June 22, 2021 09:00:00',
-    ending_date: 'September 22, 2021 22:00:00',
-  },
-  {
-    name: 'Herfst',
-    starting_date: 'September 23, 2021 08:30:00',
-    ending_date: 'December 21, 2021 20:30:00',
-  },
-  {
-    name: 'Invierno',
-    starting_date: 'December 22, 2020 11:00:00',
-    ending_date: 'March 19, 2021 19:00:00',
-  },
 ];
-
-const seedGallery = () => Gallery.bulkCreate(gallerydata);
-
-module.exports = seedGallery;
+// Function to seed posts table with dummy data using bulkCreate method
+const seedUsers = () => User.bulkCreate(userData);
+// Exporting seedPosts function for use in other files
+module.exports = seedUsers;
