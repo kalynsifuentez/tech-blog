@@ -1,15 +1,30 @@
-<main class="container">
+<div class="container">
   <div class="grid">
-  <article>
-    <div>
-      <h3>Login</h3>
+    <article>
+      <div>
+        <h3>Login</h3>
+        <form id="login">
           <fieldset>
-            <form id="login">            
-            <input id="username" type="text" name="text" placeholder="username" aria-label="Text" />
-            <input id="password" type="text" name="text" placeholder="password" aria-label="Text" />
+            <input
+              id="username"
+              type="text"
+              name="text"
+              placeholder="username"
+              aria-label="Text"
+            />
+            <input
+              id="password"
+              type="password"
+              name="text"
+              placeholder="password"
+              aria-label="Text"
+            />
           </fieldset>
           <button type="submit">Log In</button>
-    </div>
-  </article> 
+        </form>
+      </div>
+    </article>
   </div>
-  </main>
+</div>
+
+<script src="/js/login.js"></script>

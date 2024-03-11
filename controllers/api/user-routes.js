@@ -2,41 +2,39 @@ const router = require("express").Router();
 const { User } = require("../../models");
 
 // Users
-router.get("/", (req, res) => {
-  User.findAll({
-    attributes: { exclude: ["password"] },
-  })
-    .then((dbUserData) => res.json(dbUserData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+// router.get("/", (req, res) => {
+//   User.findAll({
+//     attributes: { exclude: ["password"] },
+//   })
+//     .then((dbUserData) => res.json(dbUserData))
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 // Sign up
 router.post("/signup", async (req, res) => {
   try {
-    const newUser = new User();
-    newUser.username = req.body.username;
-    newUser.email = req.body.email;
-    newUser.password = req.body.password;
-
-    const userData = await newUser.save();
+    const newUser = await User.create(req.body);
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = newUser.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.status(200).json(newUser);
     });
   } catch (err) {
-    res.status(400).json(err);
     console.log(err);
+    res.status(400).json(err);
   }
 });
 // Login
 router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { username: req.body.username } });
+    
+    const userData = await User.findOne({
+      where: { username: req.body.username },
+    });
 
     if (!userData) {
       res
@@ -64,8 +62,10 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     res.status(400).json(err);
+    console.log(err);
   }
 });
+
 // Log out
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {

@@ -1,17 +1,39 @@
 <!-- ./ Main -->
-<main class="container">
+<div class="container">
   <div class="grid">
-  <article>
-    <div>
-      <h3>Sign up</h3>
+    <article>
+      <div>
+        <h3>Sign up</h3>
+        <form id="signup">
           <fieldset>
-            <form id="signup">            
-            <input id="username-signup" type="text" name="text" placeholder="Username" aria-label="Text" />
-            <input id="email-signup" type="text" name="text" placeholder="Email" aria-label="Text" />
-            <input id="password-signup" type="text" name="text" placeholder="Password" aria-label="Text" />
+            <input
+              id="username-signup"
+              type="text"
+              name="text"
+              placeholder="Username"
+              aria-label="Text"
+            />
+            {{!-- <input
+              id="email-signup"
+              type="text"
+              name="text"
+              placeholder="Email"
+              aria-label="Text"
+            /> --}}
+            <input
+              id="password-signup"
+              type="password"
+              name="text"
+              placeholder="Password"
+              aria-label="Text"
+            />
           </fieldset>
+
           <button type="submit">Submit</button>
-    </div>
-  </article> 
+        </form>
+      </div>
+    </article>
   </div>
-  </main>
+</div>
+
+<script src="/js/signup.js"></script>
