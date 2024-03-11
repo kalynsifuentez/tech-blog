@@ -51,7 +51,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
         ],
       });
       const post = postData.get({ plain: true });
-      res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
+      res.render(post, {loggedIn: req.session.loggedIn });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
@@ -105,29 +105,6 @@ router.get("/newpost", (req, res) => {
     return;
   }
   res.redirect("/login");
-});
-
-router.get("/editpost/:id", async (req, res) => {
-  try {
-    const postData = await Post.findByPk(req.params.id, {
-      include: [
-        { model: User, attributes: ["username"] },
-        {
-          model: Comment,
-          include: [{ model: User, attributes: ["username"] }],
-        },
-      ],
-    });
-
-    const post = postData.get({ plain: true });
-
-    res.render("editpost", {
-      post,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 module.exports = router;
