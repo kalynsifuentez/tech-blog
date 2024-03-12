@@ -58,12 +58,16 @@ router.get("/dashboard", withAuth, async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render("dashboard", { posts, loggedIn: req.session.logged_in });
+    res.render("dashboard", { posts, logged_in: req.session.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+router.get('/dashboard/new', withAuth,(req, res)=> {
+  res.render('newpost', { logged_in: req.session.logged_in})
+})
 
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {

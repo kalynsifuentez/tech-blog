@@ -7,12 +7,12 @@ const newPostFormHandler = async (event) => {
   if (title && content) {
     const response = await fetch(`/api/posts`, {
       method: 'POST',
-      body: JSON.stringify({ title, content,}),
+      body: JSON.stringify({ title, content}),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      document.location.reload();
+      document.location.replace('/dashboard')
     } else {
       console.log('Response status:', response.status);
       console.log('Response text:', await response.text());
@@ -22,7 +22,6 @@ const newPostFormHandler = async (event) => {
 };
 
 // Event listeners
-const newPostForm = document.querySelector('.new-post-form');
-if (newPostForm) {
+const newPostForm = document.querySelector('#new-post');
+
   newPostForm.addEventListener('submit', newPostFormHandler);
-}
