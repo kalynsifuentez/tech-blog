@@ -1,28 +1,33 @@
 <div class="container">
-<div class="grid">
-        <h3>{{title}}</h3>
-        <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
-        <p>{{content}}</p>
-    </div>
+  <div class="grid">
+    <h3>{{title}}</h3>
+    <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
+    <p>{{content}}</p>
+  </div>
   {{#if logged_in}}
 
-    <div class="grid">
-                  <form id="comment">          
+    <form id="comment">
 
-          <fieldset>
-            <input id="content" type="text" name="text" placeholder="Add Comments" aria-label="Text" />
-          </fieldset>
-          <button type="submit">Submit</button>
-                  </form>
-    </div>
+      <input
+        id="content"
+        type="text"
+        name="text"
+        placeholder="Add Comments"
+        aria-label="Text"
+      />
 
-  {{if}}
+      <button type="submit">Submit</button>
+    </form>
+
+  {{/if}}
   <h5>Previous Comments</h5>
-  {{each comments}}
-  <div>
-    <p>{{comment_text}}</p>
-    <p> By {{user.username}} on {{format_date createdAt}}</p>
-  </div>
+  {{#each comments}}
+    <div>
+      <p>{{commentary}}</p>
+      <p> By {{user.username}} on {{format_date createdAt}}</p>
+    </div>
   {{/each}}
-  </div>
-{{!-- How to cpnnect user name to new comments --}}
+</div>
+{{#if logged_in}}
+  <script src="/js/new-comment.js"></script>
+{{/if}}

@@ -1,17 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
-// Users
-// router.get("/", (req, res) => {
-//   User.findAll({
-//     attributes: { exclude: ["password"] },
-//   })
-//     .then((dbUserData) => res.json(dbUserData))
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
 // Sign up
 router.post("/signup", async (req, res) => {
   try {

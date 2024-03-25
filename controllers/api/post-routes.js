@@ -1,38 +1,43 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
-// Get all posts with associated username
-router.get("/", async (req, res) => {
-  try {
-    const postData = await Post.findAll({
-      include: [{ model: User, attributes: ["username"] }],
-    });
-    res.status(200).json(postData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-// Get one post by ID with associated username and comments
+
+// Get posts with ID's with associated username and comments
 router.get("/:id", async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id, {
+    const postData = await Post.findAll(req.params.id, {
       include: [
         { model: User, attributes: ["username"] },
-        {
-          model: Comment,
-          include: [{ model: User, attributes: ["username"] }],
-        },
       ],
     });
-    if (!postData) {
-      res.status(404).json({ message: "No post found with that id!" });
-      return;
-    }
-    res.status(200).json(postData);
+    const commentsData = await Comment.findAll({
+      where: {
+          post_id: req.params.id
+      },
+      include: [
+              {
+                  model: User,
+                  attributes: ['username'],
+              },
+          ],
+  });
+    const posts = postData.get({ plain: true });
+    const comments = commentsData.map((comments =>
+      comments.get({ plain: true })
+      ));
+
+    res.render('homepage', {
+      title,
+      posts,
+      comments,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
+
 // Create a new post with authenticated user
 router.post("/", withAuth, async (req, res) => {
   try {
