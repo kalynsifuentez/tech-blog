@@ -1,8 +1,8 @@
 <div class="container">
   <div class="grid">
-    <h3>{{title}}</h3>
-    <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
-    <p>{{content}}</p>
+    <h3>{{post.title}}</h3>
+    <p>Created by: {{post.user.username}} | Date: {{format_date post.createdAt}}</p>
+    <p>{{post.content}}</p>
   </div>
   {{#if logged_in}}
 
@@ -21,10 +21,10 @@
 
   {{/if}}
   <h5>Previous Comments</h5>
-  {{#each comments}}
+  {{#each post.comments}}
     <div>
-      <p>{{commentary}}</p>
-      <p> By {{user.username}} on {{format_date createdAt}}</p>
+      <p>{{this.commentary}}</p>
+      <p> By {{this.user.username}} on {{format_date this.createdAt}}</p>
     </div>
   {{/each}}
 </div>
